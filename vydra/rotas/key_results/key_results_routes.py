@@ -122,7 +122,7 @@ def deletar_resultado_chave(id):
 @key_results_routes_bp.route('/page_key_results', methods=['GET'])
 @token_required
 def buscar_resultado_chave_page():
-    banco = Postsql('localhost', 'vydra', 'postgres', os.getenv("DATABASE_PASSWORD"))
+    banco = Postsql('dpg-cjju8uuphtvs73eff01g-a', 'vydra_96oh', 'vydra_96oh_user', "LNZSNaXgaB2tnD51TY8eHxNgeJ5PK8zg")
 
     query = '''   
         SELECT json_build_object(

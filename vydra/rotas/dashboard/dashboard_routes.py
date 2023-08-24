@@ -9,7 +9,7 @@ dashboard_routes_bp = Blueprint('dashboard_routes',__name__)
 @dashboard_routes_bp.route('/dashboard', methods=['GET'])
 @token_required
 def visao_geral_time():
-    banco = Postsql('localhost', 'vydra', 'postgres', os.getenv("DATABASE_PASSWORD"))
+    banco = Postsql('dpg-cjju8uuphtvs73eff01g-a', 'vydra_96oh', 'vydra_96oh_user', "LNZSNaXgaB2tnD51TY8eHxNgeJ5PK8zg")
 
     team_id = request.args.get('team_id')
 
@@ -61,7 +61,7 @@ def visao_geral_time():
 @dashboard_routes_bp.route('/dashboard_comp', methods=['GET'])
 @token_required
 def visao_geral_empresa():
-    banco = Postsql('localhost', 'vydra', 'postgres', os.getenv("DATABASE_PASSWORD"))
+    banco = Postsql('dpg-cjju8uuphtvs73eff01g-a', 'vydra_96oh', 'vydra_96oh_user', "LNZSNaXgaB2tnD51TY8eHxNgeJ5PK8zg")
 
     query = f'''
         SELECT json_agg(json_build_object(
@@ -86,7 +86,7 @@ FROM (
 @dashboard_routes_bp.route('/dashboard_teams', methods=['GET'])
 @token_required
 def visao_times():
-    banco = Postsql('localhost', 'vydra', 'postgres', os.getenv("DATABASE_PASSWORD"))
+    banco = Postsql('dpg-cjju8uuphtvs73eff01g-a', 'vydra_96oh', 'vydra_96oh_user', "LNZSNaXgaB2tnD51TY8eHxNgeJ5PK8zg")
 
     query = f'''
        SELECT json_agg(json_build_object('name', name, 'percentage', ROUND(average_percentage, 2))) AS json_output

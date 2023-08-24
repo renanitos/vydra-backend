@@ -5,7 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 import os
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_LINK")
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://vydra_96oh_user:LNZSNaXgaB2tnD51TY8eHxNgeJ5PK8zg@dpg-cjju8uuphtvs73eff01g-a/vydra_96oh"
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 CORS(app)

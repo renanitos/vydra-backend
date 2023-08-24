@@ -99,7 +99,7 @@ def recuperar_perfil():
     email = payload["email"]
     employee_id = payload["employee_id"]
 
-    banco = Postsql('localhost', 'vydra', 'postgres', os.getenv("DATABASE_PASSWORD"))
+    banco = Postsql('dpg-cjju8uuphtvs73eff01g-a', 'vydra_96oh', 'vydra_96oh_user', "LNZSNaXgaB2tnD51TY8eHxNgeJ5PK8zg")
 
     query = f'''   
     SELECT json_build_object(

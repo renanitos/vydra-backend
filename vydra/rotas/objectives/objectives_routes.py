@@ -126,7 +126,7 @@ def deletar_objetivo(id):
 @objectives_routes_bp.route('/objectives/sql/popup', methods=['GET'])
 def listar_okr_popup():
     
-    banco = Postsql('localhost', 'vydra', 'postgres', os.getenv("DATABASE_PASSWORD"))
+    banco = Postsql('dpg-cjju8uuphtvs73eff01g-a', 'vydra_96oh', 'vydra_96oh_user', "LNZSNaXgaB2tnD51TY8eHxNgeJ5PK8zg")
 
     query = '''SELECT json_build_object(
     'objective_name', o.name,
@@ -158,7 +158,7 @@ def listar_okr_popup():
 @objectives_routes_bp.route('/objectives/kr_data', methods=['GET'])
 def listar_okr_geral():
     
-    banco = Postsql('localhost', 'vydra', 'postgres', os.getenv("DATABASE_PASSWORD"))
+    banco = Postsql('dpg-cjju8uuphtvs73eff01g-a', 'vydra_96oh', 'vydra_96oh_user', "LNZSNaXgaB2tnD51TY8eHxNgeJ5PK8zg")
 
     team_id = request.args.get('team_id')
 
