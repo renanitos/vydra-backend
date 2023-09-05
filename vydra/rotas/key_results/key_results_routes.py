@@ -99,7 +99,8 @@ def atualizar_resultado_chave(id):
     resultado_chave.prevision_date = date_payload
     resultado_chave.finished_at = payload.get('finished_at')
     resultado_chave.weight = payload['weight']
-    resultado_chave.responsable = payload['responsable']
+    if payload.get("responsable") and type(payload.get("responsable")) == int:
+        resultado_chave.responsable = payload['responsable']
     resultado_chave.percentage = payload.get('percentage')
 
     db.session.commit()
@@ -123,6 +124,7 @@ def deletar_resultado_chave(id):
 @token_required
 def buscar_resultado_chave_page():
     banco = Postsql('dpg-cjju8uuphtvs73eff01g-a', 'vydra_96oh', 'vydra_96oh_user', "LNZSNaXgaB2tnD51TY8eHxNgeJ5PK8zg")
+    # banco = Postsql('dpg-cjju8uuphtvs73eff01g-a.oregon-postgres.render.com', 'vydra_96oh', 'vydra_96oh_user', "LNZSNaXgaB2tnD51TY8eHxNgeJ5PK8zg")
 
     query = '''   
         SELECT json_build_object(
