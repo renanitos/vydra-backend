@@ -93,6 +93,34 @@ class Users(db.Model):
     token = db.Column(db.String(256), nullable=False)
     employee_id = db.Column(db.Integer, db.ForeignKey('employees.id'))
 
+class Dimensions(db.Model):
+    __tablename__ = 'dimensions'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
+    name = db.Column(db.String(50), nullable=False)
+
+class Questions(db.Model):
+    __tablename__ = 'questions'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
+    description = db.Column(db.String(200), nullable=False)
+    send_date = db.Column(db.DateTime, nullable=True)
+    dimension_id = db.Column(db.Integer, db.ForeignKey('dimensions.id'))
+
+class Answers(db.Model):
+    __tablename__ = 'answers'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
+    value = db.Column(db.Integer, nullable=False)
+    date = db.Column(db.DateTime, nullable=True)
+    wave = db.Column(db.Integer, nullable=False)
+    employee_id_encrypted = db.Column(db.String(256), nullable=False)
+    question_id = db.Column(db.Integer, db.ForeignKey('questions.id'))
+    team_id = db.Column(db.Integer, db.ForeignKey('teams.id'))
+
+class Relation_User_Wave(db.Model):
+    __tablename__ = 'relation_user_wave'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
+    employee_id = db.Column(db.Integer, db.ForeignKey('employees.id'))
+    wave = db.Column(db.Integer, nullable=False)
+
 with app.app_context():
     db.create_all()
 
