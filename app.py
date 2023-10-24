@@ -25,6 +25,7 @@ from vydra.rotas.key_results.key_results_routes import key_results_routes_bp
 from vydra.rotas.authentication.authentication import authentication_routes_bp
 from vydra.rotas.dashboard.dashboard_routes import dashboard_routes_bp
 from vydra.rotas.profile.profile_routes import profile_routes_bp
+from vydra.rotas.climate.climate_routes import climate_routes_bp
 
 app.register_blueprint(rotas_bp)
 app.register_blueprint(employees_routes_bp)
@@ -37,3 +38,4 @@ app.register_blueprint(key_results_routes_bp)
 app.register_blueprint(authentication_routes_bp)
 app.register_blueprint(dashboard_routes_bp)
 app.register_blueprint(profile_routes_bp)
+app.register_blueprint(climate_routes_bp)
