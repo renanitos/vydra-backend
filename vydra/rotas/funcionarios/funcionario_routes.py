@@ -26,7 +26,20 @@ def criar_funcionario():
     db.session.add(funcionario)
     db.session.commit()
 
-    return jsonify({'message': 'Funcionário criado com sucesso!'})
+    new_employee_id = funcionario.id
+    pass_hash = generate_password_hash(funcionario.first_name)
+
+    user = Users(
+        email=funcionario.email,
+        password=pass_hash,
+        token=gerador_token(new_employee_id),
+        employee_id=new_employee_id
+    )
+
+    db.session.add(user)
+    db.session.commit()
+
+    return jsonify({'message': 'Funcionário e usuário criados com sucesso!'})
 
 @employees_routes_bp.route('/employees', methods=['GET'])
 @token_required
@@ -108,7 +121,6 @@ def deletar_funcionario(id):
 @token_required
 def buscar_todos():
     banco = Postsql('dpg-cjju8uuphtvs73eff01g-a', 'vydra_96oh', 'vydra_96oh_user', "LNZSNaXgaB2tnD51TY8eHxNgeJ5PK8zg")
-    # banco = Postsql('dpg-cjju8uuphtvs73eff01g-a.oregon-postgres.render.com', 'vydra_96oh', 'vydra_96oh_user', "LNZSNaXgaB2tnD51TY8eHxNgeJ5PK8zg")
 
     query = '''   
     SELECT json_build_object(
