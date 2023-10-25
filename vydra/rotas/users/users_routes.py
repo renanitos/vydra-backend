@@ -78,7 +78,7 @@ def recuperar_perfil():
     email = payload["email"]
     employee_id = payload["employee_id"]
 
-    banco = Postsql('localhost', 'vydra', 'postgres', os.getenv("DATABASE_PASSWORD"))
+    banco = Postsql('dpg-cjju8uuphtvs73eff01g-a', 'vydra_96oh', 'vydra_96oh_user', "LNZSNaXgaB2tnD51TY8eHxNgeJ5PK8zg")
 
     query = f'''   
     SELECT json_build_object(
@@ -93,9 +93,9 @@ def recuperar_perfil():
     'email', u.email
     ) AS json_data
     FROM employees e
-    JOIN roles r ON e.role_id = r.id
-    JOIN teams t ON e.team_id = t.id
-    JOIN users u ON u.employee_id = e.id
+    LEFT JOIN roles r ON e.role_id = r.id
+    LEFT JOIN teams t ON e.team_id = t.id
+    LEFT JOIN users u ON u.employee_id = e.id
     WHERE e.id = {employee_id} AND u.email = '{email}';'''
 
     dados = banco.query(query)
