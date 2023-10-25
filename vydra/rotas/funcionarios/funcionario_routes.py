@@ -1,7 +1,7 @@
 import os
 from flask import Blueprint, request, jsonify
 from datetime import datetime
-from vydra.models import Employees, Postsql
+from vydra.models import Employees, Postsql, Users
 from app import db
 from vydra.rotas.authentication.authentication import token_required, gerador_token
 from werkzeug.security import generate_password_hash
