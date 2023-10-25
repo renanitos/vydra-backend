@@ -2,6 +2,7 @@ from flask import Flask
 from flask_cors import CORS 
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
+from apscheduler.schedulers.background import BackgroundScheduler
 import os
 
 app = Flask(__name__)
@@ -25,7 +26,13 @@ from vydra.rotas.key_results.key_results_routes import key_results_routes_bp
 from vydra.rotas.authentication.authentication import authentication_routes_bp
 from vydra.rotas.dashboard.dashboard_routes import dashboard_routes_bp
 from vydra.rotas.profile.profile_routes import profile_routes_bp
-from vydra.rotas.climate.climate_routes import climate_routes_bp
+from vydra.rotas.climate.climate_routes import climate_routes_bp, atualiza_perguntas
+
+#Instancia a classe de tarefas agendadas
+scheduler = BackgroundScheduler()
+# scheduler.add_job(atualiza_perguntas, 'cron', day_of_week='wed', hour=1, minute=10)
+scheduler.add_job(atualiza_perguntas, 'cron', day_of_week='thu', hour=1)
+scheduler.start()
 
 app.register_blueprint(rotas_bp)
 app.register_blueprint(employees_routes_bp)

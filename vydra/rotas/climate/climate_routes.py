@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from datetime import datetime
-from vydra.models import Answers, Postsql, Relation_User_Wave
+from vydra.models import Answers, Postsql, Questions, Relation_User_Wave
 from app import db
 from vydra.rotas.authentication.authentication import token_required
 import random
@@ -85,3 +85,32 @@ def perguntas(id):
         )
 
     return jsonify({'questions': questions, 'permission': True})
+
+@climate_routes_bp.route('/answers/<int:id>', methods=['GET'])
+@token_required
+def respostas_time(id):
+    query = "SELECT json_build_object( \
+        'id', id, \
+        'value', value, \
+        'date', date, \
+        'wave', wave, \
+        'question_id', question_id, \
+        'team_id', team_id) FROM answers WHERE team_id = " + str(id)
+
+    respostas = banco.query(query)
+
+    return jsonify({'answers': respostas})
+
+def atualiza_perguntas():
+    print("atualizei")
+    query = '''   
+    SELECT DISTINCT ON (dimension_id) dimension_id, id
+    FROM questions
+    ORDER BY dimension_id, send_date'''
+
+    dados = banco.query(query)
+
+    for dado in dados:
+        question = Questions.query.get(dado[1])
+        question.send_date = datetime.now()
+        db.session.commit()
