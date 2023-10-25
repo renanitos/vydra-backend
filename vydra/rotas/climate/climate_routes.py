@@ -86,6 +86,21 @@ def perguntas(id):
 
     return jsonify({'questions': questions, 'permission': True})
 
+@climate_routes_bp.route('/answers/<int:id>', methods=['GET'])
+@token_required
+def respostas_time(id):
+    query = "SELECT json_build_object( \
+        'id', id, \
+        'value', value, \
+        'date', date, \
+        'wave', wave, \
+        'question_id', question_id, \
+        'team_id', team_id) FROM answers WHERE team_id = " + str(id)
+
+    respostas = banco.query(query)
+
+    return jsonify({'answers': respostas})
+
 def atualiza_perguntas():
     print("atualizei")
     query = '''   
