@@ -1,32 +1,11 @@
 import os
 from flask import Blueprint, request, jsonify
-from vydra.models import Postsql, Users
+from vydra.models import Postsql, Users 
 from app import db
 from werkzeug.security import generate_password_hash
-from vydra.rotas.authentication.authentication import gerador_token, token_required
+from vydra.rotas.authentication.authentication import token_required
 
 user_routes_bp = Blueprint('user_routes',__name__)
-
-@user_routes_bp.route('/users', methods=['POST'])
-def criar_usuario():
-    payload = request.json
-    password = payload['password']
-
-    pass_hash = generate_password_hash(password)
-
-    token = gerador_token(payload['employee_id'])
-
-    usuario = Users(
-        email=payload['email'],
-        password=pass_hash,
-        employee_id=payload['employee_id'],
-        token=token
-    )
-
-    db.session.add(usuario)
-    db.session.commit()
-
-    return jsonify({'message': 'Usuario criado com sucesso!'})
 
 @user_routes_bp.route('/users', methods=['GET'])
 @token_required
@@ -98,8 +77,8 @@ def recuperar_perfil():
     payload = request.json
     email = payload["email"]
     employee_id = payload["employee_id"]
+
     banco = Postsql('dpg-cjju8uuphtvs73eff01g-a', 'vydra_96oh', 'vydra_96oh_user', "LNZSNaXgaB2tnD51TY8eHxNgeJ5PK8zg")
-    # banco = Postsql('dpg-cjju8uuphtvs73eff01g-a.oregon-postgres.render.com', 'vydra_96oh', 'vydra_96oh_user', "LNZSNaXgaB2tnD51TY8eHxNgeJ5PK8zg")
 
     query = f'''   
     SELECT json_build_object(
