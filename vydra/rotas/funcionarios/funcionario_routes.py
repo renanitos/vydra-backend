@@ -3,8 +3,8 @@ from flask import Blueprint, request, jsonify
 from datetime import datetime
 from vydra.models import Employees, Postsql
 from app import db
-from vydra.rotas.authentication.authentication import token_required
-
+from vydra.rotas.authentication.authentication import token_required, gerador_token
+from werkzeug.security import generate_password_hash
 
 employees_routes_bp = Blueprint('employees_routes',__name__)
 
