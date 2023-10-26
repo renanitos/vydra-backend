@@ -31,7 +31,7 @@ from vydra.rotas.climate.climate_routes import climate_routes_bp, atualiza_pergu
 #Instancia a classe de tarefas agendadas
 scheduler = BackgroundScheduler()
 # scheduler.add_job(atualiza_perguntas, 'cron', day_of_week='wed', hour=1, minute=10)
-scheduler.add_job(atualiza_perguntas, 'cron', day_of_week='thu', hour=1)
+scheduler.add_job(atualiza_perguntas, 'cron', day_of_week='fri', hour=1, minute=10)
 scheduler.start()
 
 app.register_blueprint(rotas_bp)
