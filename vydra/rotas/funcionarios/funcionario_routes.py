@@ -44,11 +44,13 @@ def criar_funcionario():
 @employees_routes_bp.route('/employees', methods=['GET'])
 @token_required
 def listar_funcionarios():
-    funcionarios = Employees.query.all()
+    funcionarios = Employees.query.order_by(Employees.first_name).all()
 
     funcionarios_json = []
 
     for funcionario in funcionarios:
+        if str(funcionario.first_name).upper() == "ADMIN": continue
+        
         funcionario_json = {
             'id': funcionario.id,
             'first_name': funcionario.first_name,

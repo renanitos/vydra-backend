@@ -26,7 +26,7 @@ def criar_times():
 @team_routes_bp.route('/teams', methods=['GET'])
 @token_required
 def listar_times():
-    times = Teams.query.all()
+    times = Teams.query.order_by(Teams.name).all()
 
     times_json = []
 
