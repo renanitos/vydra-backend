@@ -67,7 +67,7 @@ def perguntas(id):
         return jsonify({'questions': [], 'permission': False})
 
     query = '''   
-    SELECT DISTINCT ON (dimension_id) dimension_id, description, id
+    SELECT DISTINCT ON (dimension_id) dimension_id, description, id, min_value, max_value
     FROM questions
     ORDER BY dimension_id, send_date, RANDOM()'''
 
@@ -80,7 +80,9 @@ def perguntas(id):
             {
                 "question_id": dado[2],
                 "dimension_id": dado[0],
-                "description": dado[1]
+                "description": dado[1],
+                "min_value": dado[3],
+                "max_value": dado[4]
             }
         )
 

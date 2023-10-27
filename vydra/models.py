@@ -103,6 +103,8 @@ class Questions(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
     description = db.Column(db.String(200), nullable=False)
     send_date = db.Column(db.DateTime, nullable=True)
+    min_value = db.Column(db.String(50), nullable=False)
+    max_value = db.Column(db.String(50), nullable=False)
     dimension_id = db.Column(db.Integer, db.ForeignKey('dimensions.id'))
 
 class Answers(db.Model):
