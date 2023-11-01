@@ -86,7 +86,6 @@ def atualizar_tarefa(id):
     tarefa.prevision_date = payload['prevision_date']
     tarefa.finished_at = payload.get('finished_at')
     tarefa.status = payload['status']
-    tarefa.key_result_id = payload['key_result_id']
 
     if payload['status']:
         kr_tarefa = KeyResults.query.get(tarefa.key_result_id)
@@ -157,6 +156,7 @@ def listar_tasks_kr_id():
 def listar_obj_kr_task():
     
     banco = Postsql('dpg-cjju8uuphtvs73eff01g-a', 'vydra_96oh', 'vydra_96oh_user', "LNZSNaXgaB2tnD51TY8eHxNgeJ5PK8zg")
+    # banco = Postsql('dpg-cjju8uuphtvs73eff01g-a.oregon-postgres.render.com', 'vydra_96oh', 'vydra_96oh_user', "LNZSNaXgaB2tnD51TY8eHxNgeJ5PK8zg")
 
     team_id = request.args.get('team_id')
 
@@ -183,6 +183,7 @@ def listar_obj_kr_task():
             'percentage', key_results.percentage,
             'objective_id', key_results.objective_id,
             'responsable', key_results.responsable,
+            'responsable_name', employees.first_name,
             'tasks', (
                 SELECT json_agg(json_build_object(
                     'task_id', tasks.id,
@@ -198,11 +199,13 @@ def listar_obj_kr_task():
             )
         ))
         FROM key_results
+        LEFT JOIN employees employees ON employees.id = key_results.responsable
         WHERE key_results.objective_id = objectives.id
     )
     )
     FROM objectives
-    WHERE objectives.team_id = {team_id};
+    WHERE objectives.team_id = {team_id}
+    ORDER BY objectives.name;
     '''
 
     dados = banco.query(query)
