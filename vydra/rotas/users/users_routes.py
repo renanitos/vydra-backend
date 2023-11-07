@@ -45,18 +45,23 @@ def atualizar_usuario(id):
     payload = request.json
 
     password = payload['password']
+    confirm_password = payload['confirm_password']
+
+    if password != confirm_password:
+        return jsonify({'message': 'A senha e a confirmação de senha não coincidem'}), 400
+
     pass_hash = generate_password_hash(password)
 
     usuario = Users.query.get(id)
 
     if usuario is None:
-        return jsonify({'message': 'Usuario não encontrado'}), 404
+        return jsonify({'message': 'Usuário não encontrado'}), 404
 
     usuario.password = pass_hash
 
     db.session.commit()
 
-    return jsonify({'message': 'usuario atualizado com sucesso!'})
+    return jsonify({'message': 'Usuário atualizado com sucesso!'})
 
 @user_routes_bp.route('/users/<int:id>', methods=['DELETE'])
 @token_required
