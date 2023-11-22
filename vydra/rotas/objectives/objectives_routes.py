@@ -133,7 +133,6 @@ def listar_okr_popup():
     'objective_name', o.name,
     'key_result_name', kr.name,
     'prevision_date', o.prevision_date,
-    'weight_kr', kr.weight,
     'key_result_description', kr.description,
     'responsable_name', e.first_name || ' ' || e.last_name,
     'tasks', json_agg(json_build_object(
@@ -149,7 +148,7 @@ def listar_okr_popup():
         JOIN employees e ON e.id = kr.responsable
         JOIN tasks ts ON kr.id = ts.key_result_id 
         WHERE t.id = o.team_id AND o.id = kr.objective_id AND kr.responsable = e.id AND ts.key_result_id = kr.id 
-        GROUP BY o.name, kr.name, o.prevision_date, kr.weight, kr.description, e.first_name, e.last_name;'''
+        GROUP BY o.name, kr.name, o.prevision_date, kr.description, e.first_name, e.last_name;'''
 
     dados = banco.query(query)
 
@@ -182,7 +181,6 @@ def listar_okr_geral():
             'created_at', key_results.created_at,
             'prevision_date', key_results.prevision_date,
             'finished_at', key_results.finished_at,
-            'weight', key_results.weight,
             'objective_id', key_results.objective_id,
             'responsable', key_results.responsable
         ))

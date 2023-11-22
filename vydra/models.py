@@ -51,7 +51,6 @@ class KeyResults(db.Model):
     created_at = db.Column(db.DateTime, nullable=False)
     prevision_date = db.Column(db.DateTime, nullable=False)
     finished_at = db.Column(db.DateTime, nullable=True)
-    weight = db.Column(db.Integer, nullable=False)
     percentage = db.Column(db.Integer, nullable=True, default=0)
     objective_id = db.Column(db.Integer, db.ForeignKey('objectives.id'))
     responsable = db.Column(db.Integer, db.ForeignKey('employees.id'))

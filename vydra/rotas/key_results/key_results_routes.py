@@ -22,7 +22,6 @@ def criar_resultado_chave():
         description=payload['description'],
         created_at=datetime.now(),
         prevision_date=date_payload,
-        weight=payload['weight'],
         objective_id=payload['objective_id'],
         responsable=payload['responsable']
     )
@@ -47,7 +46,6 @@ def listar_resultado_chaves():
             'created_at': resultado_chave.created_at,
             'prevision_date': resultado_chave.prevision_date,
             'finished_at': resultado_chave.finished_at,
-            'weight': resultado_chave.weight,
             'objective_id': resultado_chave.objective_id,
             'responsable': resultado_chave.responsable,
             'percentage': resultado_chave.percentage
@@ -72,7 +70,6 @@ def buscar_resultado_chave(id):
         'created_at': resultado_chave.created_at,
         'prevision_date': resultado_chave.prevision_date,
         'finished_at': resultado_chave.finished_at,
-        'weight': resultado_chave.weight,
         'objective_id': resultado_chave.objective_id,
         'responsable': resultado_chave.responsable,
         'percentage': resultado_chave.percentage
@@ -98,7 +95,6 @@ def atualizar_resultado_chave(id):
     resultado_chave.description = payload['description']
     resultado_chave.prevision_date = date_payload
     resultado_chave.finished_at = payload.get('finished_at')
-    resultado_chave.weight = payload['weight']
     if payload.get("responsable") and type(payload.get("responsable")) == int:
         resultado_chave.responsable = payload['responsable']
     resultado_chave.percentage = payload.get('percentage')
@@ -132,7 +128,6 @@ def buscar_resultado_chave_page():
         'name', kr.name,
         'description', kr.description,
         'prevision_date', kr.prevision_date,
-        'weight', kr.weight,
         'objective_id', kr.objective_id,
         'responsable_id', e.id,
         'responsable', e.first_name,
@@ -152,7 +147,6 @@ def buscar_resultado_chave_page():
         resultado_chave["name"] = dado[0]["name"]
         resultado_chave["description"] = dado[0]["description"]
         resultado_chave["prevision_date"] = dado[0]["prevision_date"]
-        resultado_chave["weight"] = dado[0]["weight"]
         resultado_chave["objective_id"] = dado[0]["objective_id"]
         resultado_chave["responsable"] = dado[0]["responsable"]
         resultado_chave["percentage"] = dado[0]["percentage"]

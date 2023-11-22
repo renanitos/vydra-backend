@@ -179,7 +179,6 @@ def listar_obj_kr_task():
             'created_at', key_results.created_at,
             'prevision_date', key_results.prevision_date,
             'finished_at', key_results.finished_at,
-            'weight', key_results.weight,
             'percentage', key_results.percentage,
             'objective_id', key_results.objective_id,
             'responsable', key_results.responsable,
