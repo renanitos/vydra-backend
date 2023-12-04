@@ -91,6 +91,7 @@ class Users(db.Model):
     password = db.Column(db.String(256), nullable=False)
     token = db.Column(db.String(256), nullable=False)
     employee_id = db.Column(db.Integer, db.ForeignKey('employees.id'))
+    administrator = db.Column(db.Boolean, nullable=False)
 
 class Dimensions(db.Model):
     __tablename__ = 'dimensions'
