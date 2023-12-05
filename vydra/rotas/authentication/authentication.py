@@ -57,7 +57,7 @@ def login():
     return jsonify({'message': 'Login válido!', 'token': usuario.token, 'employee_id' : employee.id,
     'first_name': employee.first_name, 'last_name': employee.last_name, 'email': employee.email,
     'created_at': employee.created_at, 'birth_date': employee.birth_date, 'role_id': employee.role_id,
-    'team_id': employee.team_id,'user_id':usuario.id, })
+    'team_id': employee.team_id,'user_id':usuario.id, 'administrator': usuario.administrator })
 
 @authentication_routes_bp.route('/validate-token', methods=['POST'])
 def validate_token():
