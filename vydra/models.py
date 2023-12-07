@@ -2,34 +2,11 @@ import psycopg2 as pg
 import pandas as pd
 from app import db, app
 
-class Tasks_Employees(db.Model):
-    __tablename__ = 'tasks_employees'
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
-    task_id = db.Column(db.Integer, db.ForeignKey('tasks.id'))
-    employee_id = db.Column(db.Integer, db.ForeignKey('employees.id'))
-
-class Teams_Employees(db.Model):
-    __tablename__ = 'teams_employees'
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
-    team_id = db.Column(db.Integer, db.ForeignKey('teams.id'))
-    employee_id = db.Column(db.Integer, db.ForeignKey('employees.id'))
-
 class Roles(db.Model):
     __tablename__ = 'roles'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
     name = db.Column(db.String(50), nullable=False)
     description = db.Column(db.String(150), nullable=False)
-
-'''
-PARA UM FUTURO LONGINQUO
-
-class Company(db.Model):
-    __tablename__ = 'empresa'
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
-    name = db.Column(db.String(50), nullable=False)
-    # company_area = db.relationship('area', backref='company')
-    # company_objective = db.relationship('objective', backref='company')
-'''
 
 class Objectives(db.Model):
     __tablename__ = 'objectives'
