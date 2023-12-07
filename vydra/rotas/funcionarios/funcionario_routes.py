@@ -114,10 +114,16 @@ def deletar_funcionario(id):
     if funcionario is None:
         return jsonify({'message': 'Funcionário não encontrado'}), 404
 
+    usuario_associado = Users.query.filter_by(employee_id=id).first()
+
+    if usuario_associado:
+        db.session.delete(usuario_associado)
+
     db.session.delete(funcionario)
     db.session.commit()
 
-    return jsonify({'message': 'Funcionário deletado com sucesso!'})
+    return jsonify({'message': 'Funcionário e usuário deletados com sucesso!'})
+
 
 @employees_routes_bp.route('/page_employees', methods=['GET'])
 @token_required
