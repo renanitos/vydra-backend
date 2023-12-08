@@ -118,6 +118,7 @@ def deletar_funcionario(id):
 
     if usuario_associado:
         db.session.delete(usuario_associado)
+        db.session.commit()
 
     db.session.delete(funcionario)
     db.session.commit()
